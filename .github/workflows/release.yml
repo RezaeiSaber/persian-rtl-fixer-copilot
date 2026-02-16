@@ -5,47 +5,46 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  contents: write
+
 jobs:
   release:
     runs-on: ubuntu-latest
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       
       - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          name: Persian RTL Fixer ${{ github.ref_name }}
           body: |
-            ## Changes in this Release
-            See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for details.
+            ## 🎉 Persian RTL Fixer for GitHub Copilot
             
-            ## Installation
-            See [INSTALLATION.md](https://github.com/${{ github.repository }}/blob/main/INSTALLATION.md) for installation instructions.
+            ### ✨ Features | ویژگی‌ها
+            
+            - 🔄 Auto-detect Persian/Arabic and English text direction
+            - 🎨 Custom font support for Persian and English
+            - ⚡ Optimized performance with debouncing
+            - 🔧 Configurable settings
+            - 📦 Multiple installation methods
+            - 📖 Bilingual documentation (Persian/English)
+            
+            ### 📦 Installation | نصب
+            
+            See [INSTALLATION.md](https://github.com/${{ github.repository }}/blob/main/INSTALLATION.md) for detailed instructions.
+            
+            برای راهنمای کامل [INSTALLATION.md](https://github.com/${{ github.repository }}/blob/main/INSTALLATION.md) را ببینید.
+            
+            ### 🚀 Quick Start | شروع سریع
+            
+            1. Install [Tampermonkey](https://www.tampermonkey.net/)
+            2. Download and install `rtl-fixer.user.js`
+            3. Visit GitHub Copilot and enjoy RTL text! ✅
+          files: |
+            rtl-fixer.js
+            rtl-fixer.user.js
           draft: false
           prerelease: false
-      
-      - name: Upload rtl-fixer.js
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./rtl-fixer.js
-          asset_name: rtl-fixer.js
-          asset_content_type: application/javascript
-      
-      - name: Upload rtl-fixer.user.js
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./rtl-fixer.user.js
-          asset_name: rtl-fixer.user.js
-          asset_content_type: application/javascript
