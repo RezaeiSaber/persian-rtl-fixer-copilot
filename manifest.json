@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "GitHub Copilot RTL Fixer",
+  "name__comment": "نام فارسی: رفع مشکل RTL در GitHub Copilot",
+  "version": "1.0.0",
+  "description": "Automatically detects and applies RTL/LTR direction for Persian/Arabic and English text in GitHub Copilot Chat",
+  "description__comment": "توضیح فارسی: تشخیص خودکار و اعمال جهت RTL/LTR برای متن‌های فارسی/عربی و انگلیسی در GitHub Copilot Chat",
+  
+  "permissions": [
+    "activeTab"
+  ],
+  
+  "content_scripts": [
+    {
+      "matches": ["*://github.com/*"],
+      "js": ["rtl-fixer.js"],
+      "run_at": "document_end"
+    }
+  ],
+  
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  
+  "author": "Saber Rezaei",
+  "homepage_url": "https://github.com/RezaeiSaber/persian-rtl-fixer-copilot"
+}
